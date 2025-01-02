@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import "./globals.css";
+import { createContext } from "react";
+import MainImage from "@/components/mainImage/MainImage";
+import { FormProvider } from "@/components/context/FormProvider";
 
 const ubuntu = Ubuntu({
   subsets: ["latin"],
@@ -25,7 +28,14 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/assets/images/favicon-32x32.png" />
       </head>
-      <body className={`${ubuntu.className} antialiased`}>{children}</body>
+      <body
+        className={`${ubuntu.className} antialiased bg-magnolia flex flex-col`}
+      >
+        <div className="min-h-screen flex flex-col">
+          <MainImage />
+          <FormProvider>{children}</FormProvider>
+        </div>
+      </body>
     </html>
   );
 }
