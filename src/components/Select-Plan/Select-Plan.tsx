@@ -1,14 +1,22 @@
+"use client";
 import React from "react";
 import OptionButton from "../OptionButton/OptionButton";
+import { OptionType } from "@/types";
+import { useFormContext } from "../context/FormProvider";
 
 const SelectPlan = () => {
+  const { formData, updateForm } = useFormContext();
+  const handleClick = (option: OptionType) => {
+    console.log({ plan: { label: option.label, type: option.plan.type } });
+  };
   const optionDetails = [
     {
       imgPath: "/assets/images/icon-arcade.svg",
       label: "Arcade",
       plan: {
-        monthly: "$9/mo",
-        yearly: "$90/yr",
+        label: "Arcade",
+        type: "$9/mo",
+        cost: "$90/yr",
       },
       calculation: "2 months free",
     },
@@ -16,8 +24,9 @@ const SelectPlan = () => {
       imgPath: "/assets/images/icon-advanced.svg",
       label: "Advanced",
       plan: {
-        monthly: "$12/mo",
-        yearly: "$120/yr",
+        label: "Advanced",
+        type: "$12/mo",
+        cost: "$120/yr",
       },
       calculation: "2 months free",
     },
@@ -25,8 +34,9 @@ const SelectPlan = () => {
       imgPath: "/assets/images/icon-pro.svg",
       label: "Pro",
       plan: {
-        monthly: "$15/mo",
-        yearly: "$150/yr",
+        label: "Pro",
+        type: "$15/mo",
+        cost: "$150/yr",
       },
       calculation: "2 months free",
     },
@@ -40,7 +50,13 @@ const SelectPlan = () => {
       <form action="" className="flex flex-col space-y-4">
         <div className="flex flex-col space-y-4">
           {optionDetails.map((option, index) => {
-            return <OptionButton key={index} option={option} />;
+            return (
+              <OptionButton
+                key={index}
+                option={option}
+                onHandleClick={handleClick}
+              />
+            );
           })}
         </div>
       </form>

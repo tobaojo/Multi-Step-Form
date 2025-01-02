@@ -3,19 +3,20 @@ import React from "react";
 import Image from "next/image";
 import { OptionType } from "@/types";
 
-const OptionButton = ({ option }: { option: OptionType }) => {
-  const handleClick = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    option: OptionType,
-  ) => {
+type OptionButtonType = {
+  onHandleClick: (option: OptionType) => void;
+  option: OptionType;
+};
+
+const OptionButton = ({ option, onHandleClick }: OptionButtonType) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log(option.label);
-    console.log(option.plan);
+    onHandleClick(option);
   };
   return (
     <button
       className="flex flex-row border-2 border-lightGray px-4 py-3 rounded-md w-full space-x-4 hover:border-purplishBlue hover:bg-magnolia"
-      onClick={(e) => handleClick(e, option)}
+      onClick={handleClick}
     >
       <Image
         src={option.imgPath}
@@ -27,7 +28,7 @@ const OptionButton = ({ option }: { option: OptionType }) => {
         <h2 className="font-bold text-marineBlue self-center">
           {option.label}
         </h2>
-        <p className="text-coolGray font-medium">{option.plan.monthly}</p>
+        <p className="text-coolGray font-medium">{option.plan.type}</p>
       </div>
     </button>
   );
