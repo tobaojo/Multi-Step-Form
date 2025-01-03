@@ -12,9 +12,16 @@ export type PersonalInfo = {
 };
 
 export type Plan = {
-  label: string;
   type: string;
-  cost: string;
+  monthlyCost: string;
+  yearlyCost: string;
+};
+
+export type Addon = {
+  type: string;
+  monthlyCost: string;
+  yearlyCost: string;
+  description: string;
 };
 
 export type FormData = {

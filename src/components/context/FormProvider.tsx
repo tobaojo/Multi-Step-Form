@@ -9,9 +9,9 @@ const defaultFormData: FormData = {
     email: "",
   },
   plan: {
-    label: "",
     type: "",
-    cost: "",
+    monthlyCost: "",
+    yearlyCost: "",
   },
 };
 

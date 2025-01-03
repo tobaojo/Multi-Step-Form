@@ -3,6 +3,7 @@ import PersonalInfo from "@/components/personal-info/Personal-Info";
 import Card from "@/components/card/Card";
 import Navigation from "@/components/Navigation/Navigation";
 import SelectPlan from "@/components/Select-Plan/Select-Plan";
+import Addons from "@/components/add-ons/Addons";
 
 type StepPageType = {
   params: {
@@ -34,7 +35,14 @@ export default function StepPage({ params }: StepPageType) {
           </div>
         );
       case "3":
-        return <h1>Step 3: Select Plan</h1>;
+        return (
+          <div className="mx-auto flex flex-col">
+            <Card>
+              <Addons />
+            </Card>
+            <Navigation currentStep={step} />
+          </div>
+        );
       case "4":
         return <h1>Step 4: Confirmation</h1>;
       default:

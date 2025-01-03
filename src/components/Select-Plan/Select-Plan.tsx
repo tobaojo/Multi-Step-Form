@@ -1,22 +1,40 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import OptionButton from "../OptionButton/OptionButton";
 import { OptionType } from "@/types";
 import { useFormContext } from "../context/FormProvider";
+import CostToggle from "../costToggle/CostToggle";
 
 const SelectPlan = () => {
   const { formData, updateForm } = useFormContext();
-  const handleClick = (option: OptionType) => {
-    console.log({ plan: { label: option.label, type: option.plan.type } });
+
+  const [toggle, setToggle] = useState(false);
+
+  const handleOnChange = () => {
+    setToggle((prev) => !prev);
+    updateForm("plan", {
+      ...formData.plan,
+      type: formData.plan.type,
+      monthlyCost: !toggle ? "" : formData.plan.monthlyCost,
+      yearlyCost: !toggle ? formData.plan.yearlyCost : "",
+    });
   };
+  const handleClick = (option: OptionType) => {
+    updateForm("plan", {
+      type: option.plan.type,
+      monthlyCost: toggle ? "" : option.plan.monthlyCost,
+      yearlyCost: toggle ? option.plan.yearlyCost : "",
+    });
+  };
+
   const optionDetails = [
     {
       imgPath: "/assets/images/icon-arcade.svg",
       label: "Arcade",
       plan: {
-        label: "Arcade",
-        type: "$9/mo",
-        cost: "$90/yr",
+        type: "Arcade",
+        monthlyCost: "$9/mo",
+        yearlyCost: "$90/yr",
       },
       calculation: "2 months free",
     },
@@ -24,9 +42,9 @@ const SelectPlan = () => {
       imgPath: "/assets/images/icon-advanced.svg",
       label: "Advanced",
       plan: {
-        label: "Advanced",
-        type: "$12/mo",
-        cost: "$120/yr",
+        type: "Advanced",
+        monthlyCost: "$12/mo",
+        yearlyCost: "$120/yr",
       },
       calculation: "2 months free",
     },
@@ -34,9 +52,9 @@ const SelectPlan = () => {
       imgPath: "/assets/images/icon-pro.svg",
       label: "Pro",
       plan: {
-        label: "Pro",
-        type: "$15/mo",
-        cost: "$150/yr",
+        type: "Pro",
+        monthlyCost: "$15/mo",
+        yearlyCost: "$150/yr",
       },
       calculation: "2 months free",
     },
@@ -55,11 +73,13 @@ const SelectPlan = () => {
                 key={index}
                 option={option}
                 onHandleClick={handleClick}
+                toggle={toggle}
               />
             );
           })}
         </div>
       </form>
+      <CostToggle toggle={toggle} onHandleChange={handleOnChange} />
     </div>
   );
 };
