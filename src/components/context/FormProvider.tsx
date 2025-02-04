@@ -12,7 +12,9 @@ const defaultFormData: FormData = {
     type: "",
     monthlyCost: "",
     yearlyCost: "",
+    index: 0,
   },
+
 };
 
 const FormContext = createContext<FormContextType | undefined>(undefined);

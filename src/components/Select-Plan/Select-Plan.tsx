@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import OptionButton from "../OptionButton/OptionButton";
 import { OptionType } from "@/types";
 import { useFormContext } from "../context/FormProvider";
@@ -8,7 +8,10 @@ import CostToggle from "../costToggle/CostToggle";
 const SelectPlan = () => {
   const { formData, updateForm } = useFormContext();
   const [toggle, setToggle] = useState(false);
-
+  const buttonRef1 = useRef<HTMLButtonElement>(null);
+  const buttonRef2 = useRef<HTMLButtonElement>(null);
+  const buttonRef3 = useRef<HTMLButtonElement>(null);
+  const buttonRefs = [buttonRef1, buttonRef2, buttonRef3];
 
   const handleOnChange = () => {
     setToggle((prev) => !prev);
@@ -20,14 +23,15 @@ const SelectPlan = () => {
     });
   };
 
-
-  const handleClick = (option: OptionType) => {
+  const handleClick = (option: OptionType, index: number) => {
     updateForm("plan", {
       type: option.plan.type,
       monthlyCost: toggle ? "" : option.plan.monthlyCost,
       yearlyCost: toggle ? option.plan.yearlyCost : "",
+      index
     });
   };
+
 
   const optionDetails = [
     {
@@ -37,6 +41,7 @@ const SelectPlan = () => {
         type: "Arcade",
         monthlyCost: "$9/mo",
         yearlyCost: "$90/yr",
+        index: 0
       },
       calculation: "2 months free",
     },
@@ -47,6 +52,7 @@ const SelectPlan = () => {
         type: "Advanced",
         monthlyCost: "$12/mo",
         yearlyCost: "$120/yr",
+        index: 1
       },
       calculation: "2 months free",
     },
@@ -57,6 +63,7 @@ const SelectPlan = () => {
         type: "Pro",
         monthlyCost: "$15/mo",
         yearlyCost: "$150/yr",
+        index: 2
       },
       calculation: "2 months free",
     },
@@ -74,8 +81,10 @@ const SelectPlan = () => {
               <OptionButton
                 key={index}
                 option={option}
-                onHandleClick={handleClick}
+                onHandleClick={() => handleClick(option, index)}
                 toggle={toggle}
+                nextButtonRef={buttonRefs[index]}
+                isFocused={formData?.plan.index === index}
               />
             );
           })}

@@ -15,6 +15,7 @@ export type Plan = {
   type: string;
   monthlyCost: string;
   yearlyCost: string;
+  index: number | null
 };
 
 export type Addon = {
