@@ -7,8 +7,8 @@ import CostToggle from "../costToggle/CostToggle";
 
 const SelectPlan = () => {
   const { formData, updateForm } = useFormContext();
-
   const [toggle, setToggle] = useState(false);
+
 
   const handleOnChange = () => {
     setToggle((prev) => !prev);
@@ -19,6 +19,8 @@ const SelectPlan = () => {
       yearlyCost: !toggle ? formData.plan.yearlyCost : "",
     });
   };
+
+
   const handleClick = (option: OptionType) => {
     updateForm("plan", {
       type: option.plan.type,
