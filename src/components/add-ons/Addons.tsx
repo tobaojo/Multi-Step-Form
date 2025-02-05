@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useFormContext } from "../context/FormProvider";
 import { Addon } from "@/types";
 import AddonOption from "../add-on-option/AddonOption";
 
@@ -7,20 +8,20 @@ const addonDetails: Addon[] = [
   {
     type: "Online Service",
     description: "Access to multiplayer games",
-    monthlyCost: "+ $1/mo",
-    yearlyCost: "+ $10/yr",
+    monthlyCost: "+$1/mo",
+    yearlyCost: "+$10/yr",
   },
   {
     type: "Larger Storage",
     description: "Extra 1TB of cloud save",
-    monthlyCost: "+ $2/mo",
-    yearlyCost: "+ $20/yr",
+    monthlyCost: "+$2/mo",
+    yearlyCost: "+$20/yr",
   },
   {
     type: "Customizable profile",
     description: "Custom theme on your profile",
-    monthlyCost: "+ $2/mo",
-    yearlyCost: "+ $20/yr",
+    monthlyCost: "+$2/mo",
+    yearlyCost: "+$20/yr",
   },
 ];
 
@@ -29,6 +30,9 @@ const Addons = () => {
     new Array(addonDetails.length).fill(false),
   );
   const [totalPrice, setTotalPrice] = useState([]);
+  const { formData } = useFormContext();
+
+
 
   const onBoxChange = (position: number, addonItem) => {
     const updatedCheckedState = checked.map((value, index) => {
@@ -49,7 +53,7 @@ const Addons = () => {
     setIsChecked(updatedCheckedState);
   };
 
-  const getpriceValue = (priceStr) => {
+  const getpriceValue = (priceStr: string) => {
     const match = priceStr.match(/\d+/);
     return match ? parseInt(match[0], 10) : 0;
   };
@@ -62,7 +66,7 @@ const Addons = () => {
     }
     return sum;
   }, 0);
-console.log(addonPrice)
+
   return (
     <div className="flex flex-col space-y-4">
       <h1 className="font-bold text-marineBlue text-[25px]">Pick add-ons</h1>
@@ -77,6 +81,8 @@ console.log(addonPrice)
             index={index}
             onHandleChange={onBoxChange}
             checked={checked}
+            formData={formData}
+            addonPrice={addonPrice}
           />
         );
       })}

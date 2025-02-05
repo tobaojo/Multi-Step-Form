@@ -9,7 +9,7 @@ type OptionButtonType = {
   option: OptionType;
   toggle: boolean;
   nextButtonRef: React.RefObject<HTMLButtonElement>;
-  isFocused: boolean
+  isFocused: boolean;
 };
 
 const OptionButton = ({
@@ -17,11 +17,9 @@ const OptionButton = ({
   onHandleClick,
   toggle,
   nextButtonRef,
-  isFocused
+  isFocused,
 }: OptionButtonType) => {
-const {formData} = useFormContext()
-console.log(formData)
- console.log(isFocused)
+  const { formData } = useFormContext();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();

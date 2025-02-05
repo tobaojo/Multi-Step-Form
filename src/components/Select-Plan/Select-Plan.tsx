@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import OptionButton from "../OptionButton/OptionButton";
 import { OptionType } from "@/types";
 import { useFormContext } from "../context/FormProvider";
@@ -8,30 +8,37 @@ import CostToggle from "../costToggle/CostToggle";
 const SelectPlan = () => {
   const { formData, updateForm } = useFormContext();
   const [toggle, setToggle] = useState(false);
+  const [updatedPlan, setUpdatedPlan] = useState({});
   const buttonRef1 = useRef<HTMLButtonElement>(null);
   const buttonRef2 = useRef<HTMLButtonElement>(null);
   const buttonRef3 = useRef<HTMLButtonElement>(null);
   const buttonRefs = [buttonRef1, buttonRef2, buttonRef3];
 
+  useEffect(() => {
+    const newPlan = {
+      ...updatedPlan?.plan,
+      monthlyCost: toggle ? "" : updatedPlan?.plan?.monthlyCost,
+      yearlyCost: toggle ? updatedPlan?.plan?.yearlyCost : "",
+    }
+    console.log(newPlan)
+   updateForm('plan', newPlan)
+  }, [toggle]);
+
   const handleOnChange = () => {
     setToggle((prev) => !prev);
-    updateForm("plan", {
-      ...formData.plan,
-      type: formData.plan.type,
-      monthlyCost: !toggle ? "" : formData.plan.monthlyCost,
-      yearlyCost: !toggle ? formData.plan.yearlyCost : "",
-    });
   };
 
   const handleClick = (option: OptionType, index: number) => {
-    updateForm("plan", {
-      type: option.plan.type,
-      monthlyCost: toggle ? "" : option.plan.monthlyCost,
-      yearlyCost: toggle ? option.plan.yearlyCost : "",
-      index
-    });
+    setUpdatedPlan(option)
+      const newPlan = {
+        type: option.plan.type,
+        monthlyCost: toggle ? "" : option.plan.monthlyCost,
+        yearlyCost: toggle ? option.plan.yearlyCost : "",
+        index,
+      };
+     
+      updateForm("plan", newPlan);
   };
-
 
   const optionDetails = [
     {
@@ -41,7 +48,7 @@ const SelectPlan = () => {
         type: "Arcade",
         monthlyCost: "$9/mo",
         yearlyCost: "$90/yr",
-        index: 0
+        index: 0,
       },
       calculation: "2 months free",
     },
@@ -52,7 +59,7 @@ const SelectPlan = () => {
         type: "Advanced",
         monthlyCost: "$12/mo",
         yearlyCost: "$120/yr",
-        index: 1
+        index: 1,
       },
       calculation: "2 months free",
     },
@@ -63,7 +70,7 @@ const SelectPlan = () => {
         type: "Pro",
         monthlyCost: "$15/mo",
         yearlyCost: "$150/yr",
-        index: 2
+        index: 2,
       },
       calculation: "2 months free",
     },

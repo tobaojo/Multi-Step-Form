@@ -6,7 +6,6 @@ const Navigation = ({ currentStep }: { currentStep: string }) => {
 
   const nextPage = () => {
     const next = parseInt(currentStep) + 1;
-    console.log(currentStep);
     router.push(`/${next}`);
   };
 
