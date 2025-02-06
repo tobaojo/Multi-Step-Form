@@ -28,6 +28,7 @@ export type Addon = {
 export type FormData = {
   personalInfo: PersonalInfo;
   plan: Plan;
+  addons: Addon
 };
 
 export type FormContextType = {

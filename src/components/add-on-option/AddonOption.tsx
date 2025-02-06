@@ -7,25 +7,17 @@ const AddonOption = ({
   onHandleChange,
   checked,
   index,
-  addonPrice
 }: {
   addon: Addon;
   onHandleChange: (position: number, addon?: Addon) => void;
   checked: boolean[];
   formData: FormData
   index: number;
-  addonPrice: number,
 }) => {
-  if(formData.plan.monthlyCost){
-    console.log('Monthly')
-    console.log(addonPrice)
-  } else {
-    console.log('yearly')
-  }
   return (
     <label
       htmlFor={addon.type}
-      className="flex flex-row border-2 border-lightGray px-4 py-3 rounded-md w-full space-x-4 hover:border-purplishBlue hover:bg-magnolia"
+      className="flex flex-row border-2 border-lightGray px-4 py-3 rounded-md w-full space-x-4 justify-between hover:border-purplishBlue hover:bg-magnolia"
       onClick={() => onHandleChange(index, addon)}
     >
       <input

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormContext } from "../context/FormProvider";
 import { Addon } from "@/types";
 import AddonOption from "../add-on-option/AddonOption";
@@ -29,19 +29,36 @@ const Addons = () => {
   const [checked, setIsChecked] = useState(
     new Array(addonDetails.length).fill(false),
   );
-  const [totalPrice, setTotalPrice] = useState([]);
-  const { formData } = useFormContext();
+  const [addons, setAddons] = useState([]);
+  const [addonsAndPrice, setAddonsAndPrice] = useState({});
+  const { formData, updateForm } = useFormContext();
 
+  useEffect(() => {
+    const res = addons.reduce((sum, currentState) => {
+      if (currentState) {
+        if (formData.plan.monthlyCost) {
+          sum += getpriceValue(currentState?.monthlyCost);
+        } else {
+          sum += getpriceValue(currentState?.yearlyCost);
+        }
+      }
+      return sum;
+    }, 0);
+    setAddonsAndPrice({ addons, price: res });
+  }, [addons]);
 
+  useEffect(() => {
+    updateForm("addons", addonsAndPrice);
+  }, [addonsAndPrice]);
 
   const onBoxChange = (position: number, addonItem) => {
     const updatedCheckedState = checked.map((value, index) => {
       if (index === position) {
         if (!value === true) {
-          setTotalPrice([...totalPrice, addonItem]);
+          setAddons([...addons, addonItem]);
         } else if (!value === false) {
-          setTotalPrice(
-            totalPrice.filter((item) => {
+          setAddons(
+            addons.filter((item) => {
               return item.type !== addonItem.type;
             }),
           );
@@ -52,21 +69,12 @@ const Addons = () => {
     });
     setIsChecked(updatedCheckedState);
   };
-
   const getpriceValue = (priceStr: string) => {
     const match = priceStr.match(/\d+/);
     return match ? parseInt(match[0], 10) : 0;
   };
 
-  const addonPrice = totalPrice.reduce((sum, currentState) => {
-    if (currentState) {
-      sum +=
-        getpriceValue(currentState.yearlyCost) ||
-        getpriceValue(currentState.monthlyCost);
-    }
-    return sum;
-  }, 0);
-
+  console.log(formData);
   return (
     <div className="flex flex-col space-y-4">
       <h1 className="font-bold text-marineBlue text-[25px]">Pick add-ons</h1>
@@ -82,7 +90,6 @@ const Addons = () => {
             onHandleChange={onBoxChange}
             checked={checked}
             formData={formData}
-            addonPrice={addonPrice}
           />
         );
       })}
