@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { useFormContext } from "../context/FormProvider";
 import { OptionType } from "@/types";
 
 type OptionButtonType = {
@@ -19,7 +18,6 @@ const OptionButton = ({
   nextButtonRef,
   isFocused,
 }: OptionButtonType) => {
-  const { formData } = useFormContext();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
