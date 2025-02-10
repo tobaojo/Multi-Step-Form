@@ -33,3 +33,14 @@ export const total = (formData: FormData) => {
   console.log(result);
   return result;
 };
+
+export const validateFormData = (formData: FormData, key: string) => {
+  for (const [index, value] of Object.entries(formData[key])) {
+    if (!value) {
+      // maybe return an array of errors?
+      console.log(`${index} is empty`)
+      return `${index} is empty`;
+    }
+  }
+  return null
+};

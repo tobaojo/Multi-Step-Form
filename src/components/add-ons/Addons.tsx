@@ -71,7 +71,7 @@ const Addons = () => {
 
     setIsChecked(updatedCheckedState);
   };
-
+console.log(checked)
 
   return (
     <div className="flex flex-col space-y-4">

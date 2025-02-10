@@ -1,13 +1,13 @@
 "use client";
 import { useFormContext } from "../context/FormProvider";
 const PersonalInfo = () => {
-  const { formData, updateForm } = useFormContext();
+  const { formData, updateForm, formError } = useFormContext();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     updateForm("personalInfo", { [name]: value });
   };
-
+console.log(formError)
   return (
     <div className="flex flex-col space-y-4">
       <h1 className="font-bold text-marineBlue text-[25px]">Personal Info</h1>
@@ -25,8 +25,9 @@ const PersonalInfo = () => {
             value={formData.personalInfo.name}
             onChange={handleChange}
             placeholder="e.g. Stephen King"
-            className="border border-lightGray px-4 py-2 rounded-md w-full"
+            className="border border-lightGray px-4 py-2 rounded-md w-full text-purplishBlue"
           />
+          {formError && <small className="text-red-500">{formError}</small>}
         </div>
         <div>
           <label htmlFor="email" className="text-marineBlue">

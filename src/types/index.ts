@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type OptionType = {
   imgPath: string;
   label: string;
@@ -15,7 +17,7 @@ export type Plan = {
   type: string;
   monthlyCost: string;
   yearlyCost: string;
-  index: number | null
+  index: number | null;
 };
 
 export type Addon = {
@@ -29,12 +31,14 @@ export type FormData = {
   personalInfo: PersonalInfo;
   plan: Plan;
   addons: {
-    addons: Addon[],
-    price: number
-  }
+    addons: Addon[];
+    price: number;
+  };
 };
 
 export type FormContextType = {
+  formError: string | null;
+  setFormError: Dispatch<SetStateAction<string | null>>
   formData: FormData;
   updateForm: (
     step: keyof FormData,
