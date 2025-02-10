@@ -5,6 +5,8 @@ import Navigation from "@/components/Navigation/Navigation";
 import SelectPlan from "@/components/Select-Plan/Select-Plan";
 import Addons from "@/components/add-ons/Addons";
 import FinishingUp from "@/components/finishingUp/FinishingUp";
+import Confirmation from "@/components/Confirmation/Confirmation";
+import NavLinks from "@/components/Navlinks/NavLinks";
 
 type StepPageType = {
   params: {
@@ -19,7 +21,8 @@ export default function StepPage({ params }: StepPageType) {
     switch (step) {
       case "1":
         return (
-          <div className="mx-auto flex flex-col">
+          <div className="mx-auto flex flex-col space-y-2">
+            <NavLinks currentStep={step} />
             <Card>
               <PersonalInfo />
             </Card>
@@ -28,7 +31,8 @@ export default function StepPage({ params }: StepPageType) {
         );
       case "2":
         return (
-          <div className="mx-auto flex flex-col">
+          <div className="mx-auto flex flex-col space-y-2">
+            <NavLinks currentStep={step} />
             <Card>
               <SelectPlan />
             </Card>
@@ -37,7 +41,8 @@ export default function StepPage({ params }: StepPageType) {
         );
       case "3":
         return (
-          <div className="mx-auto flex flex-col">
+          <div className="mx-auto flex flex-col space-y-2">
+            <NavLinks currentStep={step} />
             <Card>
               <Addons />
             </Card>
@@ -46,7 +51,8 @@ export default function StepPage({ params }: StepPageType) {
         );
       case "4":
         return (
-          <div className="mx-auto flex flex-col">
+          <div className="mx-auto flex flex-col space-y-2">
+            <NavLinks currentStep={step} />
             <Card>
               <FinishingUp />
             </Card>
@@ -54,7 +60,13 @@ export default function StepPage({ params }: StepPageType) {
           </div>
         );
       case "5":
-        return <h1>Step 5: Confirmation</h1>;
+        return (
+          <div className="mx-auto flex flex-col">
+            <Card>
+              <Confirmation />
+            </Card>
+          </div>
+        );
       default:
         // Show 404 for invalid steps
         notFound();

@@ -15,6 +15,7 @@ const Navigation = ({ currentStep }: { currentStep: string }) => {
       router.push(`/${prev}`);
     }
   };
+
   return (
     <div className="fixed bottom-0 flex flex-row justify-between align-end h-auto bg-white p-4 self-end w-full">
       <button
@@ -27,10 +28,10 @@ const Navigation = ({ currentStep }: { currentStep: string }) => {
       </button>
 
       <button
-        className="bg-marineBlue text-White p-4 rounded-md hover:opacity-85"
+        className={`bg-marineBlue text-White p-4 rounded-md hover:opacity-85 ${parseInt(currentStep) === 4 ? `bg-purplishBlue`:``}`}
         onClick={nextPage}
       >
-        Next Step
+        {parseInt(currentStep) === 4 ? "Confirm" : " Next Step"}
       </button>
     </div>
   );

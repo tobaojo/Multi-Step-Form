@@ -30,7 +30,7 @@ const Addons = () => {
   const [checked, setIsChecked] = useState(
     new Array(addonDetails.length).fill(false),
   );
-  const [addons, setAddons] = useState([]);
+  const [addons, setAddons] = useState<Addon[]>([]);
   const [addonsAndPrice, setAddonsAndPrice] = useState({});
   const { formData, updateForm } = useFormContext();
 
@@ -52,7 +52,7 @@ const Addons = () => {
     updateForm("addons", addonsAndPrice);
   }, [addonsAndPrice]);
 
-  const onBoxChange = (position: number, addonItem) => {
+  const onBoxChange = (position: number, addonItem: Addon) => {
     const updatedCheckedState = checked.map((value, index) => {
       if (index === position) {
         if (!value === true) {
@@ -68,11 +68,11 @@ const Addons = () => {
       }
       return value;
     });
+
     setIsChecked(updatedCheckedState);
   };
 
 
-  console.log(formData);
   return (
     <div className="flex flex-col space-y-4">
       <h1 className="font-bold text-marineBlue text-[25px]">Pick add-ons</h1>

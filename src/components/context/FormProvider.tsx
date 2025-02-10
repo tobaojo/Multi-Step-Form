@@ -14,7 +14,10 @@ const defaultFormData: FormData = {
     yearlyCost: "",
     index: 0,
   },
-addons:{}
+  addons: {
+    addons: [],
+    price: 0,
+  },
 };
 
 const FormContext = createContext<FormContextType | undefined>(undefined);

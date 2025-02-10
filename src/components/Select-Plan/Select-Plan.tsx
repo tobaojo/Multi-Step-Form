@@ -8,7 +8,7 @@ import CostToggle from "../costToggle/CostToggle";
 const SelectPlan = () => {
   const { formData, updateForm } = useFormContext();
   const [toggle, setToggle] = useState(false);
-  const [updatedPlan, setUpdatedPlan] = useState({});
+  const [updatedPlan, setUpdatedPlan] = useState<OptionType | null>(null);
   const buttonRef1 = useRef<HTMLButtonElement>(null);
   const buttonRef2 = useRef<HTMLButtonElement>(null);
   const buttonRef3 = useRef<HTMLButtonElement>(null);
@@ -19,9 +19,8 @@ const SelectPlan = () => {
       ...updatedPlan?.plan,
       monthlyCost: toggle ? "" : updatedPlan?.plan?.monthlyCost,
       yearlyCost: toggle ? updatedPlan?.plan?.yearlyCost : "",
-    }
-    console.log(newPlan)
-   updateForm('plan', newPlan)
+    };
+    updateForm("plan", newPlan);
   }, [toggle]);
 
   const handleOnChange = () => {
@@ -29,15 +28,15 @@ const SelectPlan = () => {
   };
 
   const handleClick = (option: OptionType, index: number) => {
-    setUpdatedPlan(option)
-      const newPlan = {
-        type: option.plan.type,
-        monthlyCost: toggle ? "" : option.plan.monthlyCost,
-        yearlyCost: toggle ? option.plan.yearlyCost : "",
-        index,
-      };
-     
-      updateForm("plan", newPlan);
+    setUpdatedPlan(option);
+    const newPlan = {
+      type: option.plan.type,
+      monthlyCost: toggle ? "" : option.plan.monthlyCost,
+      yearlyCost: toggle ? option.plan.yearlyCost : "",
+      index,
+    };
+
+    updateForm("plan", newPlan);
   };
 
   const optionDetails = [

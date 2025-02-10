@@ -1,16 +1,11 @@
 "use client";
-import { useState } from "react";
 import Link from "next/link";
 import { useFormContext } from "../context/FormProvider";
-import { getpriceValue, addTextToValue } from "../../utils/utils";
+import { total } from "../../utils/utils";
 
 const FinishingUp = () => {
   const { formData } = useFormContext();
-  const [monthly, setMonthly] = useState(false);
 
-  if(formData.plan.monthlyCost){
-    setMonthly(true)
-  }
   return (
     <div className="flex flex-col space-y-6">
       <h1 className="font-bold text-marineBlue text-[25px]">Finishing up</h1>
@@ -23,7 +18,7 @@ const FinishingUp = () => {
             <h3 className="font-semibold text-marineBlue">{`${
               formData?.plan?.type
             }(${formData?.plan?.monthlyCost ? `Monthly` : `Yearly`})`}</h3>
-            <Link href={""} className="underline">
+            <Link href={"/2"} className="underline">
               Change
             </Link>
           </div>
@@ -35,30 +30,29 @@ const FinishingUp = () => {
           </span>
         </div>
         <div>
-          <ul>
-            {formData?.addons?.addons?.map((addon) => (
-              <li key={addon?.type}>
-                <div className="flex justify-between py-2">
-                  <span className="text-coolGray">{addon?.type}</span>
-                  <span className="text-coolGray">
-                    {formData?.plan?.monthlyCost
-                      ? addon?.monthlyCost
-                      : addon?.yearlyCost}
-                  </span>
-                </div>
-              </li>
-            ))}
-          </ul>
+          {formData?.addons?.addons?.length === 0 ? (
+            <p>No Addons selected</p>
+          ) : (
+            <ul>
+              {formData?.addons?.addons?.map((addon) => (
+                <li key={addon?.type}>
+                  <div className="flex justify-between py-2">
+                    <span className="text-coolGray">{addon?.type}</span>
+                    <span className="text-coolGray">
+                      {formData?.plan?.monthlyCost
+                        ? addon?.monthlyCost
+                        : addon?.yearlyCost}
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
       <div className="flex justify-between py-2">
-        <span className="">Total</span>
-        <span className="text-purplishBlue">
-          {addTextToValue(
-            getpriceValue(formData.plan.monthlyCost) + formData.addons.price,
-            monthly,
-          )}
-        </span>
+        <span className="">`Total {formData?.plan?.monthlyCost ? `(Monthly)` : `(Yearly)`}</span>
+        <span className="text-purplishBlue font-semibold">{total(formData)}</span>
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ const AddonOption = ({
   index,
 }: {
   addon: Addon;
-  onHandleChange: (position: number, addon?: Addon) => void;
+  onHandleChange: (position: number, addonItem: Addon) => void;
   checked: boolean[];
   formData: FormData
   index: number;

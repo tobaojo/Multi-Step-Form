@@ -1,3 +1,5 @@
+import { FormData } from "@/types";
+
 export const getpriceValue = (priceStr: string) => {
   if (priceStr) {
     const match = priceStr.match(/\d+/);
@@ -7,10 +9,27 @@ export const getpriceValue = (priceStr: string) => {
 };
 
 export const addTextToValue = (priceNum: number, monthly: boolean) => {
-  if (!priceNum) {
-    return `n/a`;
+  return monthly ? `$${priceNum}/mo` : `${priceNum}/yr`;
+};
+
+export const total = (formData: FormData) => {
+  if (!formData?.plan) {
+    return "0";
+  }
+  let planCost;
+  let monthly;
+  const addonsCost = formData.addons.price;
+  if (formData?.plan?.monthlyCost) {
+    planCost = getpriceValue(formData.plan.monthlyCost);
+    monthly = true;
   } else {
-    return monthly ? `+$${priceNum}/mo` : `+${priceNum}/yr`;
+    planCost = getpriceValue(formData.plan.yearlyCost);
+    monthly = false;
   }
 
+  const totalCost = addonsCost + planCost;
+
+  const result = addTextToValue(totalCost, monthly);
+  console.log(result);
+  return result;
 };
