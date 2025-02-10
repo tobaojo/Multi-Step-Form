@@ -28,7 +28,10 @@ export type Addon = {
 export type FormData = {
   personalInfo: PersonalInfo;
   plan: Plan;
-  addons: Addon
+  addons: {
+    addons: Addon[],
+    price: number
+  }
 };
 
 export type FormContextType = {

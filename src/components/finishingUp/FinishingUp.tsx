@@ -1,18 +1,24 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import { useFormContext } from "../context/FormProvider";
+import { getpriceValue, addTextToValue } from "../../utils/utils";
 
 const FinishingUp = () => {
   const { formData } = useFormContext();
-  console.log(formData.addons);
+  const [monthly, setMonthly] = useState(false);
+
+  if(formData.plan.monthlyCost){
+    setMonthly(true)
+  }
   return (
-    <div className='flex flex-col space-y-4"'>
+    <div className="flex flex-col space-y-6">
       <h1 className="font-bold text-marineBlue text-[25px]">Finishing up</h1>
-      <p className="text-coolGray leading-6 font-medium">
+      <p className="text-coolGray leading-1 font-small text-[1.1rem] mt-0">
         Double-check everything looks OK before confirming.
       </p>
       <div className="flex flex-col w-full bg-magnolia p-6 rounded-lg self-center">
-        <div className="flex justify-between py-2 border border-b-black">
+        <div className="flex justify-between py-2  border-b">
           <div className="">
             <h3 className="font-semibold text-marineBlue">{`${
               formData?.plan?.type
@@ -33,8 +39,12 @@ const FinishingUp = () => {
             {formData?.addons?.addons?.map((addon) => (
               <li key={addon?.type}>
                 <div className="flex justify-between py-2">
-                  <span className="text-coolGray">{addon?.type}</span>{" "}
-                  <span className="text-coolGray">{addon?.monthlyCost}</span>
+                  <span className="text-coolGray">{addon?.type}</span>
+                  <span className="text-coolGray">
+                    {formData?.plan?.monthlyCost
+                      ? addon?.monthlyCost
+                      : addon?.yearlyCost}
+                  </span>
                 </div>
               </li>
             ))}
@@ -43,7 +53,12 @@ const FinishingUp = () => {
       </div>
       <div className="flex justify-between py-2">
         <span className="">Total</span>
-        <span className="text-purplishBlue">{formData.addons.price}</span>
+        <span className="text-purplishBlue">
+          {addTextToValue(
+            getpriceValue(formData.plan.monthlyCost) + formData.addons.price,
+            monthly,
+          )}
+        </span>
       </div>
     </div>
   );

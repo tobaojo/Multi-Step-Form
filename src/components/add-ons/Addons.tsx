@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useFormContext } from "../context/FormProvider";
 import { Addon } from "@/types";
 import AddonOption from "../add-on-option/AddonOption";
+import { getpriceValue } from "@/utils/utils";
 
 const addonDetails: Addon[] = [
   {
@@ -69,10 +70,7 @@ const Addons = () => {
     });
     setIsChecked(updatedCheckedState);
   };
-  const getpriceValue = (priceStr: string) => {
-    const match = priceStr.match(/\d+/);
-    return match ? parseInt(match[0], 10) : 0;
-  };
+
 
   console.log(formData);
   return (
