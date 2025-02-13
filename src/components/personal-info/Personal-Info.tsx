@@ -7,7 +7,7 @@ const PersonalInfo = () => {
     const { name, value } = e.target;
     updateForm("personalInfo", { [name]: value });
   };
-console.log(formError)
+
   return (
     <div className="flex flex-col space-y-4">
       <h1 className="font-bold text-marineBlue text-[25px]">Personal Info</h1>
@@ -27,7 +27,11 @@ console.log(formError)
             placeholder="e.g. Stephen King"
             className="border border-lightGray px-4 py-2 rounded-md w-full text-purplishBlue"
           />
-          {formError && <small className="text-red-500">{formError}</small>}
+          {!formData.personalInfo.name && (
+            <small className="text-red-500">
+              {formError?.includes("name") && "Name is required"}
+            </small>
+          )}
         </div>
         <div>
           <label htmlFor="email" className="text-marineBlue">
@@ -41,6 +45,11 @@ console.log(formError)
             placeholder="e.g. stephenking@lorem.com"
             className="border border-lightGray px-4 py-2 rounded-md w-full"
           />
+          {!formData.personalInfo.email && (
+            <small className="text-red-500">
+              {formError?.includes("email") && "Email is required"}
+            </small>
+          )}
         </div>
         <div>
           <label htmlFor="number" className="text-marineBlue">
@@ -54,6 +63,11 @@ console.log(formError)
             placeholder="e.g. +1 234 567 890"
             className="border border-lightGray px-4 py-2 rounded-md w-full"
           />
+          {!formData.personalInfo.phone && (
+            <small className="text-red-500">
+              {formError?.includes("phone") && "Phone is required"}
+            </small>
+          )}
         </div>
       </form>
     </div>

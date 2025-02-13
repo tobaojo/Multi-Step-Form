@@ -30,17 +30,42 @@ export const total = (formData: FormData) => {
   const totalCost = addonsCost + planCost;
 
   const result = addTextToValue(totalCost, monthly);
-  console.log(result);
   return result;
 };
 
-export const validateFormData = (formData: FormData, key: string) => {
-  for (const [index, value] of Object.entries(formData[key])) {
-    if (!value) {
-      // maybe return an array of errors?
-      console.log(`${index} is empty`)
-      return `${index} is empty`;
-    }
+export const validateFormData = (formData: FormData, currentPage: string) => {
+  const errors = [];
+  let key;
+  switch (currentPage) {
+    case "1":
+      key = "personalInfo";
+      for (const [index, value] of Object.entries(formData[key])) {
+        if (!value) {
+          errors.push(index);
+        }
+      }
+      if (errors.length > 0) {
+        return errors;
+      } else {
+        return null;
+      }
+    case "2":
+      key = "plan";
+      for (const [index, value] of Object.entries(formData[key])) {
+        if (!value) {
+          errors.push(index);
+        }
+      }
+      if (
+        errors.length >= 4 ||
+        (errors.includes("montlyCost") && errors.includes("yearlyCost"))
+      ) {
+        console.log(errors);
+        return errors;
+      } else {
+        return null;
+      }
+    default:
+      break;
   }
-  return null
 };

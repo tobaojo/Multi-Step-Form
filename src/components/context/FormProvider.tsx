@@ -34,7 +34,7 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [formData, setFormData] = useState<FormData>(defaultFormData);
-  const [formError, setFormError] = useState<string | null>(null)
+  const [formError, setFormError] = useState<string[] | null>(null);
 
   const updateForm = (
     step: keyof FormData,
@@ -47,7 +47,9 @@ export const FormProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   return (
-    <FormContext.Provider value={{ formData, updateForm, formError, setFormError }}>
+    <FormContext.Provider
+      value={{ formData, updateForm, formError, setFormError }}
+    >
       {children}
     </FormContext.Provider>
   );

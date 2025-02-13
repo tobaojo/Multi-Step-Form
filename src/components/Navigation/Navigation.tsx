@@ -7,14 +7,20 @@ const Navigation = ({ currentStep }: { currentStep: string }) => {
   const router = useRouter();
   const { formData, setFormError } = useFormContext();
 
-
   const nextPage = () => {
     const next = parseInt(currentStep) + 1;
-    const errorMessage = validateFormData(formData, "personalInfo");
-    if(errorMessage){
-      setFormError(errorMessage || null)
-      return
+    const FormErrors = validateFormData(formData, currentStep);
+
+    if (FormErrors) {
+      setFormError(FormErrors || null);
+      return;
     }
+
+    // if (planErrors) {
+    //   setFormError(planErrors || null);
+    //   return;
+    // }
+
     router.push(`/${next}`);
   };
 

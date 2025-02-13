@@ -6,13 +6,15 @@ import { useFormContext } from "../context/FormProvider";
 import CostToggle from "../costToggle/CostToggle";
 
 const SelectPlan = () => {
-  const { formData, updateForm } = useFormContext();
+  const { formData, updateForm, formError } = useFormContext();
   const [toggle, setToggle] = useState(false);
   const [updatedPlan, setUpdatedPlan] = useState<OptionType | null>(null);
   const buttonRef1 = useRef<HTMLButtonElement>(null);
   const buttonRef2 = useRef<HTMLButtonElement>(null);
   const buttonRef3 = useRef<HTMLButtonElement>(null);
   const buttonRefs = [buttonRef1, buttonRef2, buttonRef3];
+
+  console.log(formError);
 
   useEffect(() => {
     const newPlan = {
@@ -81,6 +83,10 @@ const SelectPlan = () => {
         You have the option of monthly or yearly billing.
       </p>
       <form action="" className="flex flex-col space-y-4">
+        {formError?.includes("yearlyCost") &&
+          formError?.includes("monthlyCost") && (
+            <small>please select an option</small>
+          )}
         <div className="flex flex-col space-y-4">
           {optionDetails.map((option, index) => {
             return (

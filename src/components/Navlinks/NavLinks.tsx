@@ -3,7 +3,6 @@
 import Link from "next/link";
 
 const NavLinks = ({ currentStep }: { currentStep: string }) => {
-  console.log(typeof currentStep);
   return (
     <div className="p-6 absolute top-5 space-x-6 self-center">
       <Link

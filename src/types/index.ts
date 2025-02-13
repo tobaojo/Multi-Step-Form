@@ -37,8 +37,8 @@ export type FormData = {
 };
 
 export type FormContextType = {
-  formError: string | null;
-  setFormError: Dispatch<SetStateAction<string | null>>
+  formError: string[] | null;
+  setFormError: Dispatch<SetStateAction<string[] | null>>;
   formData: FormData;
   updateForm: (
     step: keyof FormData,
