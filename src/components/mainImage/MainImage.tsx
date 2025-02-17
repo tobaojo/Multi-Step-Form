@@ -8,7 +8,7 @@ const MainImage = () => {
         src="/assets/images/bg-sidebar-mobile.svg"
         alt="Background sidebar for mobile"
         layout="fill"
-        className="absolute top-0 left-0"
+        className="absolute top-0 left-0 block md:hidden"
         objectFit="cover"
       />
     </div>

@@ -4,10 +4,10 @@ import Link from "next/link";
 
 const NavLinks = ({ currentStep }: { currentStep: string }) => {
   return (
-    <div className="p-6 absolute top-5 space-x-6 self-center">
+    <div className="flex p-6 fixed top-2 space-x-6 self-center mx-auto align-middle items-center">
       <Link
         href={"/1"}
-        className={`rounded-full border border-white p-3 py-2 text-white font-semibold ${
+        className={`rounded-full border border-white px-4 py-[0.50rem] text-white font-semibold ${
           parseInt(currentStep) === 1 ? `bg-pastelBlue text-black` : ``
         }`}
       >
@@ -15,7 +15,7 @@ const NavLinks = ({ currentStep }: { currentStep: string }) => {
       </Link>
       <Link
         href={"/2"}
-        className={`rounded-full border border-white p-3 py-2 text-white font-semibold ${
+        className={`rounded-full border border-white px-4 py-[0.50rem] text-white font-semibold ${
           parseInt(currentStep) === 2 ? `bg-pastelBlue text-black` : ``
         }`}
       >
@@ -23,7 +23,7 @@ const NavLinks = ({ currentStep }: { currentStep: string }) => {
       </Link>
       <Link
         href={"/3"}
-        className={`rounded-full border border-white p-3 py-2 text-white font-semibold ${
+        className={`rounded-full border border-white px-4 py-[0.50rem] text-white font-semibold ${
           parseInt(currentStep) === 3 ? `bg-pastelBlue text-black` : ``
         }`}
       >
@@ -31,7 +31,7 @@ const NavLinks = ({ currentStep }: { currentStep: string }) => {
       </Link>
       <Link
         href={"/4"}
-        className={`rounded-full border border-white p-3 py-2 text-white font-semibold ${
+        className={`rounded-full border border-white px-4 py-[0.50rem] text-white font-semibold ${
           parseInt(currentStep) === 4 ? `bg-pastelBlue text-black` : ``
         }`}
       >

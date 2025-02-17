@@ -1,4 +1,4 @@
-import { FormData } from "@/types";
+import { FormData, PersonalInfo } from "@/types";
 
 export const getpriceValue = (priceStr: string) => {
   if (priceStr) {
@@ -60,7 +60,6 @@ export const validateFormData = (formData: FormData, currentPage: string) => {
         errors.length >= 4 ||
         (errors.includes("montlyCost") && errors.includes("yearlyCost"))
       ) {
-        console.log(errors);
         return errors;
       } else {
         return null;

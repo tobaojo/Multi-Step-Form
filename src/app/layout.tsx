@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import "./globals.css";
-import { createContext } from "react";
 import MainImage from "@/components/mainImage/MainImage";
 import { FormProvider } from "@/components/context/FormProvider";
 

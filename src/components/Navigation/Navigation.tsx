@@ -2,6 +2,8 @@
 import { useRouter } from "next/navigation";
 import { validateFormData } from "@/utils/utils";
 import { useFormContext } from "../context/FormProvider";
+import NextButton from "../Buttons/NextButton";
+import PrevButton from "../Buttons/PrevButton";
 
 const Navigation = ({ currentStep }: { currentStep: string }) => {
   const router = useRouter();
@@ -16,11 +18,6 @@ const Navigation = ({ currentStep }: { currentStep: string }) => {
       return;
     }
 
-    // if (planErrors) {
-    //   setFormError(planErrors || null);
-    //   return;
-    // }
-
     router.push(`/${next}`);
   };
 
@@ -32,24 +29,9 @@ const Navigation = ({ currentStep }: { currentStep: string }) => {
   };
 
   return (
-    <div className="fixed bottom-0 flex flex-row justify-between align-end h-auto bg-white p-4 self-end w-full">
-      <button
-        className={`text-coolGray font-medium ${
-          parseInt(currentStep) === 1 ? "opacity-0" : ""
-        }`}
-        onClick={prevPage}
-      >
-        Go Back
-      </button>
-
-      <button
-        className={`bg-marineBlue text-White p-4 rounded-md hover:opacity-85 ${
-          parseInt(currentStep) === 4 ? `bg-purplishBlue` : ``
-        }`}
-        onClick={nextPage}
-      >
-        {parseInt(currentStep) === 4 ? "Confirm" : " Next Step"}
-      </button>
+    <div className="fixed bottom-0 flex flex-row justify-between bg-white right-0 p-4 w-full md:absolute md:justify-evenly md:bg-transparent md:top-[35rem] md:left-[10rem] md:h-[13%] md:flex">
+      <PrevButton currentStep={currentStep} prevPage={prevPage} />
+      <NextButton currentStep={currentStep} nextPage={nextPage} />
     </div>
   );
 };

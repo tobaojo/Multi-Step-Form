@@ -1,3 +1,4 @@
+"use client";
 import { notFound } from "next/navigation";
 import PersonalInfo from "@/components/personal-info/Personal-Info";
 import Card from "@/components/card/Card";
@@ -22,11 +23,11 @@ export default function StepPage({ params }: StepPageType) {
       case "1":
         return (
           <div className="mx-auto flex flex-col space-y-2">
-            <NavLinks currentStep={step} />
             <Card>
+              <NavLinks currentStep={step} />
               <PersonalInfo />
+              <Navigation currentStep={step} />
             </Card>
-            <Navigation currentStep={step} />
           </div>
         );
       case "2":
@@ -35,8 +36,8 @@ export default function StepPage({ params }: StepPageType) {
             <NavLinks currentStep={step} />
             <Card>
               <SelectPlan />
+              <Navigation currentStep={step} />
             </Card>
-            <Navigation currentStep={step} />
           </div>
         );
       case "3":
@@ -45,8 +46,8 @@ export default function StepPage({ params }: StepPageType) {
             <NavLinks currentStep={step} />
             <Card>
               <Addons />
+              <Navigation currentStep={step} />
             </Card>
-            <Navigation currentStep={step} />
           </div>
         );
       case "4":
@@ -55,8 +56,8 @@ export default function StepPage({ params }: StepPageType) {
             <NavLinks currentStep={step} />
             <Card>
               <FinishingUp />
+              <Navigation currentStep={step} />
             </Card>
-            <Navigation currentStep={step} />
           </div>
         );
       case "5":
