@@ -9,7 +9,7 @@ const NextButton = ({
 }) => {
   return (
     <button
-      className={`bg-marineBlue text-White p-4 rounded-md hover:opacity-85 ${
+      className={`bg-marineBlue text-White p-4 rounded-md hover:opacity-85 md:h-[3.2rem] md:w-[8rem] ${
         parseInt(currentStep) === 4 ? `bg-purplishBlue` : ``
       }`}
       onClick={nextPage}

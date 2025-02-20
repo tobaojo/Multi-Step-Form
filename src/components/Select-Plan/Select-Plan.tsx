@@ -77,7 +77,7 @@ const SelectPlan = () => {
     },
   ];
   return (
-    <div className="flex flex-col space-y-4">
+    <div className="flex flex-col space-y-6 w-full">
       <h1 className="font-bold text-marineBlue text-[25px]">Select Plan</h1>
       <p className="text-coolGray leading-6 font-medium">
         You have the option of monthly or yearly billing.
@@ -87,7 +87,7 @@ const SelectPlan = () => {
           formError?.includes("monthlyCost") && (
             <small>please select an option</small>
           )}
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-4 md:flex-row md:h-[12rem] md:space-x-10 md:align-middle md:justify-center md:space-y-0 md:mt-10">
           {optionDetails.map((option, index) => {
             return (
               <OptionButton

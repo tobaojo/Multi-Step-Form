@@ -8,6 +8,7 @@ import Addons from "@/components/add-ons/Addons";
 import FinishingUp from "@/components/finishingUp/FinishingUp";
 import Confirmation from "@/components/Confirmation/Confirmation";
 import NavLinks from "@/components/Navlinks/NavLinks";
+import MainImageDesktop from "@/components/mainImage/MainImageDesktop";
 
 type StepPageType = {
   params: {
@@ -22,8 +23,9 @@ export default function StepPage({ params }: StepPageType) {
     switch (step) {
       case "1":
         return (
-          <div className="mx-auto flex flex-col space-y-2">
+          <div className="mx-auto flex flex-col space-y-2 md:flex-row justify-center">
             <Card>
+              <MainImageDesktop />
               <NavLinks currentStep={step} />
               <PersonalInfo />
               <Navigation currentStep={step} />
@@ -33,8 +35,9 @@ export default function StepPage({ params }: StepPageType) {
       case "2":
         return (
           <div className="mx-auto flex flex-col space-y-2">
-            <NavLinks currentStep={step} />
             <Card>
+              <MainImageDesktop />
+              <NavLinks currentStep={step} />
               <SelectPlan />
               <Navigation currentStep={step} />
             </Card>
@@ -43,8 +46,9 @@ export default function StepPage({ params }: StepPageType) {
       case "3":
         return (
           <div className="mx-auto flex flex-col space-y-2">
-            <NavLinks currentStep={step} />
             <Card>
+              <MainImageDesktop />
+              <NavLinks currentStep={step} />
               <Addons />
               <Navigation currentStep={step} />
             </Card>
@@ -53,8 +57,9 @@ export default function StepPage({ params }: StepPageType) {
       case "4":
         return (
           <div className="mx-auto flex flex-col space-y-2">
-            <NavLinks currentStep={step} />
             <Card>
+              <MainImageDesktop />
+              <NavLinks currentStep={step} />
               <FinishingUp />
               <Navigation currentStep={step} />
             </Card>

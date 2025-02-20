@@ -18,7 +18,6 @@ const OptionButton = ({
   nextButtonRef,
   isFocused,
 }: OptionButtonType) => {
-
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     onHandleClick(option);
@@ -26,7 +25,7 @@ const OptionButton = ({
 
   return (
     <button
-      className={`flex flex-row border-2 border-lightGray px-4 py-3 rounded-md w-full space-x-4 hover:border-purplishBlue hover:bg-magnolia ${
+      className={`flex flex-row border-2 border-lightGray px-4 py-3 rounded-md w-full h-full self-center md:flex-col hover:border-purplishBlue hover:bg-magnolia ${
         isFocused ? "border-purplishBlue" : "border-lightGray"
       }`}
       onClick={handleClick}

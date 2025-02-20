@@ -7,7 +7,7 @@ const FinishingUp = () => {
   const { formData } = useFormContext();
 
   return (
-    <div className="flex flex-col space-y-6">
+    <div className="flex flex-col space-y-6 w-full">
       <h1 className="font-bold text-marineBlue text-[25px]">Finishing up</h1>
       <p className="text-coolGray leading-1 font-small text-[1.1rem] mt-0">
         Double-check everything looks OK before confirming.
@@ -51,8 +51,12 @@ const FinishingUp = () => {
         </div>
       </div>
       <div className="flex justify-between py-2">
-        <span className="">`Total {formData?.plan?.monthlyCost ? `(Monthly)` : `(Yearly)`}</span>
-        <span className="text-purplishBlue font-semibold">{total(formData)}</span>
+        <span className="">
+          `Total {formData?.plan?.monthlyCost ? `(Monthly)` : `(Yearly)`}
+        </span>
+        <span className="text-purplishBlue font-semibold">
+          {total(formData)}
+        </span>
       </div>
     </div>
   );

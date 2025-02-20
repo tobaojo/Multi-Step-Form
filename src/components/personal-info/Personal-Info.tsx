@@ -9,65 +9,78 @@ const PersonalInfo = () => {
   };
 
   return (
-    <div className="flex flex-col space-y-4">
+    <div className="flex flex-col space-y-6 w-full">
       <h1 className="font-bold text-marineBlue text-[25px]">Personal Info</h1>
       <p className="text-coolGray leading-6 font-medium">
         Please provide your name, email address and phone number.
       </p>
       <form className="flex flex-col space-y-4">
-        <div>
-          <label htmlFor="name" className="text-marineBlue">
-            Name
-          </label>
+        <div className="w-full md:mt-10">
+          <div className="flex justify-between">
+            <label htmlFor="name" className="text-marineBlue">
+              Name
+            </label>
+            {!formData.personalInfo.name && (
+              <small className="text-red-500 font-semibold">
+                {formError?.includes("name") && "This field is required"}
+              </small>
+            )}
+          </div>
           <input
             type="text"
             name="name"
             value={formData.personalInfo.name}
             onChange={handleChange}
             placeholder="e.g. Stephen King"
-            className="border border-lightGray px-4 py-2 rounded-md w-full text-purplishBlue"
+            className={`border border-lightGray px-4 py-2 rounded-md w-full text-purplishBlue ${
+              formError?.includes("name") && `border-red-500`
+            }`}
           />
-          {!formData.personalInfo.name && (
-            <small className="text-red-500">
-              {formError?.includes("name") && "Name is required"}
-            </small>
-          )}
         </div>
         <div>
-          <label htmlFor="email" className="text-marineBlue">
-            Email Address
-          </label>
+          <div className="flex justify-between">
+            <label htmlFor="email" className="text-marineBlue">
+              Email Address
+            </label>
+            {!formData.personalInfo.email && (
+              <small className="text-red-500 font-semibold">
+                {formError?.includes("email") && "This field is required"}
+              </small>
+            )}
+          </div>
           <input
             type="email"
             name="email"
             value={formData.personalInfo.email}
             onChange={handleChange}
             placeholder="e.g. stephenking@lorem.com"
-            className="border border-lightGray px-4 py-2 rounded-md w-full"
+            className={`border border-lightGray px-4 py-2 rounded-md w-full text-purplishBlue ${
+              formError?.includes("email") && `border-red-500`
+            }`}
           />
-          {!formData.personalInfo.email && (
-            <small className="text-red-500">
-              {formError?.includes("email") && "Email is required"}
-            </small>
-          )}
         </div>
         <div>
-          <label htmlFor="number" className="text-marineBlue">
-            Phone Number
-          </label>
+          <div className="flex justify-between">
+            <label htmlFor="number" className="text-marineBlue">
+              Phone Number
+            </label>
+            {!formData.personalInfo.phone && (
+              <small className="text-red-500 font-semibold">
+                {formError?.includes("phone") && "This field is required"}
+              </small>
+            )}
+          </div>
+
           <input
             type="text"
             name="phone"
             value={formData.personalInfo.phone}
             onChange={handleChange}
             placeholder="e.g. +1 234 567 890"
-            className="border border-lightGray px-4 py-2 rounded-md w-full"
+            className={`border border-lightGray px-4 py-2 rounded-md w-full text-purplishBlue ${
+              formError?.includes("phone") && `border-red-500`
+            }`}
           />
-          {!formData.personalInfo.phone && (
-            <small className="text-red-500">
-              {formError?.includes("phone") && "Phone is required"}
-            </small>
-          )}
         </div>
       </form>
     </div>

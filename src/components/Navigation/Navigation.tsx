@@ -29,7 +29,7 @@ const Navigation = ({ currentStep }: { currentStep: string }) => {
   };
 
   return (
-    <div className="fixed bottom-0 flex flex-row justify-between bg-white right-0 p-4 w-full md:absolute md:justify-evenly md:bg-transparent md:top-[35rem] md:left-[10rem] md:h-[13%] md:flex">
+    <div className="fixed bottom-0 flex flex-row justify-between bg-white right-0 p-4 w-full md:absolute md:justify-evenly md:bg-transparent md:top-[30rem] md:left-[10rem] md:h-[13%] md:flex">
       <PrevButton currentStep={currentStep} prevPage={prevPage} />
       <NextButton currentStep={currentStep} nextPage={nextPage} />
     </div>
