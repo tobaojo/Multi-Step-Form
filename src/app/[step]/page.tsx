@@ -23,7 +23,7 @@ export default function StepPage({ params }: StepPageType) {
     switch (step) {
       case "1":
         return (
-          <div className="mx-auto flex flex-col space-y-2 md:flex-row justify-center">
+          <div className="mx-auto flex flex-col space-y-2">
             <Card>
               <MainImageDesktop />
               <NavLinks currentStep={step} />

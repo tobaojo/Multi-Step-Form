@@ -1,4 +1,4 @@
-import { FormData, PersonalInfo } from "@/types";
+import { FormData } from "@/types";
 
 export const getpriceValue = (priceStr: string) => {
   if (priceStr) {
@@ -67,4 +67,11 @@ export const validateFormData = (formData: FormData, currentPage: string) => {
     default:
       break;
   }
+};
+
+export const isOnlyNumbers = (str: string) => {
+  if (str === "" || /^\+?\d*$/.test(str)) {
+    return str;
+  }
+  return "";
 };

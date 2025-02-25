@@ -28,9 +28,9 @@ export default function RootLayout({
         <link rel="icon" href="/assets/images/favicon-32x32.png" />
       </head>
       <body
-        className={`${ubuntu.className} antialiased bg-magnolia flex flex-col`}
+        className={`${ubuntu.className} antialiased bg-magnolia overflow-x-hidden max-w-full`}
       >
-        <div className="min-h-screen flex flex-col">
+        <div className="">
           <MainImage />
           <FormProvider>{children}</FormProvider>
         </div>

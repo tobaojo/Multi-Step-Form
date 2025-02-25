@@ -77,15 +77,19 @@ const SelectPlan = () => {
     },
   ];
   return (
-    <div className="flex flex-col space-y-6 w-full">
-      <h1 className="font-bold text-marineBlue text-[25px]">Select Plan</h1>
-      <p className="text-coolGray leading-6 font-medium">
+    <div className="flex flex-col space-y-4 md:space-y-3 w-full m-5 md:m-10">
+      <h1 className="font-bold text-marineBlue text-2xl md:text-[2rem] tracking-tight">
+        Select Plan
+      </h1>
+      <p className="text-coolGray font-medium text-base w-[20rem] md:w-[32rem]">
         You have the option of monthly or yearly billing.
       </p>
       <form action="" className="flex flex-col space-y-4">
         {formError?.includes("yearlyCost") &&
           formError?.includes("monthlyCost") && (
-            <small>please select an option</small>
+            <small className="text-red-500 font-semibold">
+              please select an option
+            </small>
           )}
         <div className="flex flex-col space-y-4 md:flex-row md:h-[12rem] md:space-x-10 md:align-middle md:justify-center md:space-y-0 md:mt-10">
           {optionDetails.map((option, index) => {
