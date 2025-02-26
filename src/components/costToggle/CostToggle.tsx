@@ -5,7 +5,7 @@ type CostToggleType = {
 
 const CostToggle = ({ toggle, onHandleChange }: CostToggleType) => {
   return (
-    <>
+    <div className="bg-magnolia mx-auto p-7 w-full self-center justify-items-center">
       <label className="self-center inline-flex items-center cursor-pointer space-x-1">
         <input
           type="checkbox"
@@ -22,7 +22,7 @@ const CostToggle = ({ toggle, onHandleChange }: CostToggleType) => {
           Yearly
         </span>
       </label>
-    </>
+    </div>
   );
 };
 

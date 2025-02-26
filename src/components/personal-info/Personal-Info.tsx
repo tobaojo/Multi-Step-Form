@@ -20,7 +20,7 @@ const PersonalInfo = () => {
       </p>
       <form className="flex flex-col space-y-4">
         <div className="w-full md:mt-10 space-y-1">
-          <div className="flex justify-between w-[90%] md:w-[80%]">
+          <div className="flex justify-between w-[90%] md:w-[90%]">
             <label htmlFor="name" className="font-medium text-marineBlue">
               Name
             </label>
@@ -42,7 +42,7 @@ const PersonalInfo = () => {
           />
         </div>
         <div className="space-y-1">
-          <div className="flex justify-between w-[90%] md:w-[80%]">
+          <div className="flex justify-between w-[90%] md:w-[90%]">
             <label htmlFor="email" className="font-medium text-marineBlue">
               Email Address
             </label>
@@ -64,7 +64,7 @@ const PersonalInfo = () => {
           />
         </div>
         <div className="space-y-1">
-          <div className="flex justify-between w-[90%] md:w-[80%]">
+          <div className="flex justify-between w-[90%] md:w-[90%]">
             <label htmlFor="number" className="font-medium text-marineBlue">
               Phone Number
             </label>
