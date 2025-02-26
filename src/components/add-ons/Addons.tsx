@@ -73,9 +73,11 @@ const Addons = () => {
   };
 
   return (
-    <div className="flex flex-col space-y-6 w-full">
-      <h1 className="font-bold text-marineBlue text-[25px]">Pick add-ons</h1>
-      <p className="text-coolGray leading-6 font-medium">
+    <div className="flex flex-col space-y-4 md:space-y-3 w-full m-5 md:m-10">
+      <h1 className="font-bold text-marineBlue text-2xl md:text-[2rem] tracking-tight">
+        Pick add-ons
+      </h1>
+      <p className="text-coolGray font-medium text-base w-[20rem] md:w-[32rem]">
         Add-ons help enhance your gaming experience.
       </p>
       {addonDetails.map((addon, index) => {
