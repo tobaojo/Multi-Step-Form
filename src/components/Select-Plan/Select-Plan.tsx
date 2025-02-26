@@ -8,37 +8,36 @@ import CostToggle from "../costToggle/CostToggle";
 const SelectPlan = () => {
   const { formData, updateForm, formError } = useFormContext();
   const [toggle, setToggle] = useState(false);
-  const [updatedPlan, setUpdatedPlan] = useState<OptionType | null>(null);
   const buttonRef1 = useRef<HTMLButtonElement>(null);
   const buttonRef2 = useRef<HTMLButtonElement>(null);
   const buttonRef3 = useRef<HTMLButtonElement>(null);
   const buttonRefs = [buttonRef1, buttonRef2, buttonRef3];
 
-  console.log(formError);
-
   useEffect(() => {
     const newPlan = {
-      ...updatedPlan?.plan,
-      monthlyCost: toggle ? "" : updatedPlan?.plan?.monthlyCost,
-      yearlyCost: toggle ? updatedPlan?.plan?.yearlyCost : "",
+      ...formData?.plan,
+      monthlyCost: formData?.plan?.monthlyCost,
+      yearlyCost: formData?.plan?.yearlyCost,
     };
     updateForm("plan", newPlan);
-  }, [toggle]);
+  }, [formData.type.yearly]);
 
   const handleOnChange = () => {
     setToggle((prev) => !prev);
+    updateForm("type", { yearly: !toggle });
   };
 
   const handleClick = (option: OptionType, index: number) => {
-    setUpdatedPlan(option);
-    const newPlan = {
+    const currentPlan = formData?.plan || {};
+
+    const updatedPlan = {
+      ...currentPlan,
       type: option.plan.type,
-      monthlyCost: toggle ? "" : option.plan.monthlyCost,
-      yearlyCost: toggle ? option.plan.yearlyCost : "",
+      monthlyCost: option.plan.monthlyCost,
+      yearlyCost: option.plan.yearlyCost,
       index,
     };
-
-    updateForm("plan", newPlan);
+    updateForm("plan", updatedPlan);
   };
 
   const optionDetails = [
@@ -98,7 +97,7 @@ const SelectPlan = () => {
                 key={index}
                 option={option}
                 onHandleClick={() => handleClick(option, index)}
-                toggle={toggle}
+                toggle={formData.type.yearly}
                 nextButtonRef={buttonRefs[index]}
                 isFocused={formData?.plan.index === index}
               />
@@ -106,7 +105,10 @@ const SelectPlan = () => {
           })}
         </div>
       </form>
-      <CostToggle toggle={toggle} onHandleChange={handleOnChange} />
+      <CostToggle
+        toggle={formData.type.yearly}
+        onHandleChange={handleOnChange}
+      />
     </div>
   );
 };

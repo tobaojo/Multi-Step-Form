@@ -1,4 +1,4 @@
-import { FormData } from "@/types";
+import { Addon, FormData } from "@/types";
 
 export const getpriceValue = (priceStr: string) => {
   if (priceStr) {
@@ -12,25 +12,53 @@ export const addTextToValue = (priceNum: number, monthly: boolean) => {
   return monthly ? `$${priceNum}/mo` : `${priceNum}/yr`;
 };
 
-export const total = (formData: FormData) => {
+const calculateAddonsCost = (addon: { addons: Addon[] }, monthly: boolean) => {
+  if (monthly) {
+    const addonPrice =
+      addon?.addons
+        ?.map((addon) => getpriceValue(addon.monthlyCost))
+        ?.reduce((cur, acc) => {
+          acc = acc + cur;
+          return acc;
+        }, 0) || 0;
+    return addonPrice;
+  } else {
+    const addonPrice =
+      addon?.addons
+        .map((addon) => getpriceValue(addon.yearlyCost))
+        .reduce((cur, acc) => {
+          acc = acc + cur;
+          return acc;
+        }, 0) || 0;
+    return addonPrice;
+  }
+};
+
+export const total = (formData: FormData, type: boolean) => {
   if (!formData?.plan) {
     return "0";
   }
   let planCost;
   let monthly;
-  const addonsCost = formData.addons.price;
-  if (formData?.plan?.monthlyCost) {
-    planCost = getpriceValue(formData.plan.monthlyCost);
-    monthly = true;
-  } else {
-    planCost = getpriceValue(formData.plan.yearlyCost);
+  let addonsCost;
+
+  if (type) {
     monthly = false;
+    planCost = getpriceValue(formData.plan.yearlyCost);
+    addonsCost = calculateAddonsCost(formData.addons, monthly);
+    const totalCost = addonsCost + planCost;
+
+    const result = addTextToValue(totalCost, monthly);
+    return result;
+  } else {
+    monthly = true;
+    planCost = getpriceValue(formData.plan.monthlyCost);
+    addonsCost = calculateAddonsCost(formData.addons, monthly);
+    const totalCost = addonsCost + planCost;
+
+    const result = addTextToValue(totalCost, monthly);
+    return result;
   }
-
-  const totalCost = addonsCost + planCost;
-
-  const result = addTextToValue(totalCost, monthly);
-  return result;
 };
 
 export const validateFormData = (formData: FormData, currentPage: string) => {

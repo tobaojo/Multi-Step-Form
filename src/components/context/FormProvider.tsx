@@ -8,6 +8,7 @@ const defaultFormData: FormData = {
     phone: "",
     email: "",
   },
+  type: { yearly: false },
   plan: {
     type: "",
     monthlyCost: "",

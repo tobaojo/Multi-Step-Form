@@ -29,6 +29,7 @@ export type Addon = {
 
 export type FormData = {
   personalInfo: PersonalInfo;
+  type: { yearly: boolean };
   plan: Plan;
   addons: {
     addons: Addon[];

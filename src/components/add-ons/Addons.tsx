@@ -1,5 +1,4 @@
 "use client";
-import React, { useState, useEffect } from "react";
 import { useFormContext } from "../context/FormProvider";
 import { Addon } from "@/types";
 import AddonOption from "../add-on-option/AddonOption";
@@ -27,51 +26,25 @@ const addonDetails: Addon[] = [
 ];
 
 const Addons = () => {
-  const [checked, setIsChecked] = useState(
-    new Array(addonDetails.length).fill(false),
-  );
-  const [addons, setAddons] = useState<Addon[]>([]);
-  const [addonsAndPrice, setAddonsAndPrice] = useState({});
   const { formData, updateForm } = useFormContext();
 
-  useEffect(() => {
-    const res = addons.reduce((sum, currentState) => {
-      if (currentState) {
-        if (formData.plan.monthlyCost) {
-          sum += getpriceValue(currentState?.monthlyCost);
-        } else {
-          sum += getpriceValue(currentState?.yearlyCost);
-        }
-      }
-      return sum;
-    }, 0);
-    setAddonsAndPrice({ addons, price: res });
-  }, [addons]);
+  const onBoxChange = (index: number, addonItem: Addon) => {
+    const currentAddons = formData?.addons?.addons || [];
 
-  useEffect(() => {
-    updateForm("addons", addonsAndPrice);
-  }, [addonsAndPrice]);
+    const updatedAddons = currentAddons.some((a) => a.type === addonItem.type)
+      ? currentAddons.filter((addon) => addon.type !== addonItem.type)
+      : [...currentAddons, addonItem];
+    const totalPrice = updatedAddons.reduce(
+      (sum, addon) =>
+        sum +
+        (formData.type.yearly
+          ? getpriceValue(addon.yearlyCost)
+          : getpriceValue(addon.monthlyCost)),
+      0,
+    );
 
-  const onBoxChange = (position: number, addonItem: Addon) => {
-    const updatedCheckedState = checked.map((value, index) => {
-      if (index === position) {
-        if (!value === true) {
-          setAddons([...addons, addonItem]);
-        } else if (!value === false) {
-          setAddons(
-            addons.filter((item) => {
-              return item.type !== addonItem.type;
-            }),
-          );
-        }
-        return !value;
-      }
-      return value;
-    });
-
-    setIsChecked(updatedCheckedState);
+    updateForm("addons", { addons: updatedAddons, price: totalPrice });
   };
-
   return (
     <div className="flex flex-col space-y-4 md:space-y-3 w-full m-5 md:m-10">
       <h1 className="font-bold text-marineBlue text-2xl md:text-[2rem] tracking-tight">
@@ -87,7 +60,6 @@ const Addons = () => {
             addon={addon}
             index={index}
             onHandleChange={onBoxChange}
-            checked={checked}
             formData={formData}
           />
         );
